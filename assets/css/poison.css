@@ -277,17 +277,30 @@ tbody tr:nth-child(odd) th {
     height: 1.1em;
     order: 2;
 }
+/*
+    The wrapper used to be fixed, which took it out of the flow and left the
+    column with nothing to scroll: a long table of contents ran past the
+    bottom of the window, with no scrollbar and no way to reach the last
+    entries. Back in the flow, the max-height and the overflow below do the
+    work, and the highlight can follow the reading position along the list.
+*/
 .article-toc {
     display: none;
     font-size: 0.9em;
     width: 20em;
     margin-top: 5em;
+    padding-right: 0.5em;
     overflow-y: auto;
+    overflow-x: hidden;
     line-height: 1.4em;
     max-height: 85%;
 }
-.article-toc .toc-wrapper{
-    position: fixed;
+/* The same hairline the article uses, so one scroll style serves the page. */
+.article-toc::-webkit-scrollbar {
+    width: 3px;
+}
+.article-toc::-webkit-scrollbar-thumb {
+    border-radius: 1.5px;
 }
 .article-toc nav {
     margin-left: 1em;
