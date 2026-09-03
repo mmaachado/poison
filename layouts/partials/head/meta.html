@@ -62,7 +62,14 @@
 <meta name="twitter:description" content="{{ .Scratch.Get "description" }}" />
 
 <!-- Link Tags -->
-<base href="{{ .Permalink }}" />
+
+<!-- No <base> tag here on purpose. Hugo already writes every href and src as
+     either absolute or root relative, so the tag changes nothing while the
+     configured baseURL matches the host that serves the page. When it does not
+     match, it turns every root relative path into a request to the other host:
+     one stale or not yet resolving domain in baseURL and the whole site loads
+     without stylesheets, scripts or fonts. Relative URLs resolve against the
+     page either way, since .Permalink was the page URL to begin with. -->
 <link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
 <meta name="url" content="{{ .Permalink }}" />
 <meta name="twitter:url" content="{{ .Permalink }}" />
