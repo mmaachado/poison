@@ -327,9 +327,19 @@ tbody tr:nth-child(odd) th {
 .article-toc li.inactive {
     font-weight: 300;
 }
+/*
+    Above 100em the ToC joins the row and the article stops growing at its
+    max-width, so whatever the viewport had left sat dead on the right edge.
+    Auto margins on flex items soak up that free space: the article and the
+    ToC travel together, centered in the area after the sidebar.
+*/
 @media screen and (min-width: 100em) {
     .article-toc {
         display: block;
+        margin-right: auto;
+    }
+    .content {
+        margin-left: auto;
     }
 }
 .next-post {
