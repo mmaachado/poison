@@ -330,15 +330,17 @@ tbody tr:nth-child(odd) th {
 /*
     Above 100em the ToC joins the row and the article stops growing at its
     max-width, so whatever the viewport had left sat dead on the right edge.
-    Auto margins on flex items soak up that free space: the article and the
-    ToC travel together, centered in the area after the sidebar.
+    Auto margins on flex items soak up that free space: article and ToC travel
+    together, centered in the area after the sidebar. Only when the ToC is
+    actually in the row, though: on lists and taxonomies main is the last
+    child, and those keep the column beside the sidebar as before.
 */
 @media screen and (min-width: 100em) {
     .article-toc {
         display: block;
         margin-right: auto;
     }
-    .content {
+    .content:not(:last-child) {
         margin-left: auto;
     }
 }
