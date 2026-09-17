@@ -295,12 +295,13 @@ tbody tr:nth-child(odd) th {
     line-height: 1.4em;
     max-height: 85%;
 }
-/* The same hairline the article uses, so one scroll style serves the page. */
-.article-toc::-webkit-scrollbar {
-    width: 3px;
+/* The list still scrolls, it just never shows a bar: the ToC is a margin
+   note, and a scrollbar next to it reads as a second column. */
+.article-toc {
+    scrollbar-width: none;
 }
-.article-toc::-webkit-scrollbar-thumb {
-    border-radius: 1.5px;
+.article-toc::-webkit-scrollbar {
+    display: none;
 }
 .article-toc nav {
     margin-left: 1em;
