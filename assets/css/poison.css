@@ -110,7 +110,16 @@ body > .wrapper {
     display: flex;
     height: 100%;
 }
+/*
+    The column is the scroll container, so anything positioned absolutely
+    inside it has to be contained here: KaTeX writes its .katex-mathml spans
+    that way, and with main static they anchored to the viewport instead,
+    giving the window thousands of pixels of scrollable overflow. A fragment
+    jump the column could not satisfy (a footnote near the end) then scrolled
+    the window itself, and the fixed-height body left the lower half blank.
+*/
 .container.content {
+    position: relative;
     overflow-y: auto;
     flex-grow: 1;
 }
