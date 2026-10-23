@@ -343,7 +343,7 @@ tbody tr:nth-child(odd) th {
     Auto margins on flex items soak up that free space: article and ToC travel
     together, centered in the area after the sidebar. Only when the ToC is
     actually in the row, though: on lists and taxonomies main is the last
-    child, and those keep the column beside the sidebar as before.
+    child, and the rule below centers it on its own.
 */
 @media screen and (min-width: 100em) {
     .article-toc {
@@ -352,6 +352,20 @@ tbody tr:nth-child(odd) th {
     }
     .content:not(:last-child) {
         margin-left: auto;
+    }
+}
+/*
+    The home page, lists and taxonomies have no ToC, so main is the last child
+    and used to hug the sidebar, leaving the rest of a wide window empty on
+    the right. Auto margins center it instead. They also stop flex-grow from
+    applying, so the basis has to ask for the full width; max-width still caps
+    the column, and a short list no longer shrinks it to its content.
+*/
+@media (min-width: 48em) {
+    .content:last-child {
+        margin-left: auto;
+        margin-right: auto;
+        flex-basis: 100%;
     }
 }
 .next-post {
