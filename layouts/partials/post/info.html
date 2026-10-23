@@ -46,10 +46,4 @@
     Series: <a href="{{ $Site.BaseURL }}series/{{ .Params.series | urlize }}">{{ .Params.series }}</a>
   </p>
   {{ end }}
-
-  {{ if .Params.featuredImage }}
-  <p>
-    <img src="{{.Params.featuredImage}}"><br>
-  </p>
-  {{ end }}
 </div>

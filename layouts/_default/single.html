@@ -1,5 +1,6 @@
 {{ define "main" -}}
 <div class="post">
+  {{ partial "post/banner.html" . }}
   {{ partial "post/info.html" . }}
   {{ .Content }}
   {{ if (.Site.Params.listmonk) }}
