@@ -390,6 +390,12 @@ tbody tr:nth-child(odd) th {
     object-fit: cover;
     border-radius: 4px;
 }
+.post-banner--card {
+    margin-bottom: 1em;
+}
+.post-banner--card img {
+    max-height: 10rem;
+}
 .next-post {
     text-align: right;
     float: right;

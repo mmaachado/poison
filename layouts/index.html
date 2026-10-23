@@ -3,6 +3,9 @@
     {{ $frontPageTypes := default (slice "posts") .Site.Params.front_page_content }}
     {{ range (.Paginate (where .Site.RegularPages "Type" "in" $frontPageTypes)).Pages }}
     <article class="post">
+        {{ if site.Params.cardBanners }}
+        {{ partial "post/banner.html" (dict "page" . "thumb" true) }}
+        {{ end }}
         {{ partial "post/info.html" . }}
         {{ if or (.Site.Params.noSummary) (.Params.noSummary) }}
         {{ .Content }}
