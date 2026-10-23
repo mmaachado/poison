@@ -368,6 +368,15 @@ tbody tr:nth-child(odd) th {
         flex-basis: 100%;
     }
 }
+/* Home page cards: a rule between them, so each post reads as its own unit
+   instead of running into the next one's title. */
+.posts .post {
+    margin-bottom: 3em;
+}
+.posts .post + .post {
+    border-top: 1px solid var(--table-border-color);
+    padding-top: 2em;
+}
 .next-post {
     text-align: right;
     float: right;
