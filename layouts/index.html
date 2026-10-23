@@ -7,8 +7,15 @@
         {{ if or (.Site.Params.noSummary) (.Params.noSummary) }}
         {{ .Content }}
         {{ else }}
+        {{/* The description is written to sum the post up, so it makes a
+             better card than the first words of the body. Without one, fall
+             back to Hugo's summary. */}}
+        {{ with .Description }}
+        <p class="summary">{{ . }}</p>
+        {{ else }}
         {{ .Summary }}
-        {{ if .Truncated }}
+        {{ end }}
+        {{ if or .Description .Truncated }}
         <div class="read-more-link">
             <a href="{{ .RelPermalink }}">Read More…</a>
         </div>
