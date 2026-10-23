@@ -1,3 +1,6 @@
+> This is a fork of [lukeorth's Poison](https://github.com/lukeorth/poison) theme with my
+> personal changes. It is not synced with upstream unless the author requires it.
+
 # Poison
 
 ![Poison screenshot](https://raw.githubusercontent.com/lukeorth/poison/master/images/screenshot.png)
