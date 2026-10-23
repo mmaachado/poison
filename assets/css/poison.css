@@ -377,6 +377,19 @@ tbody tr:nth-child(odd) th {
     border-top: 1px solid var(--table-border-color);
     padding-top: 2em;
 }
+/* Post banner: full column width, cropped to a band so a tall image doesn't
+   push the title below the fold. */
+.post-banner {
+    margin: 0 0 2em;
+}
+.post-banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 24rem;
+    object-fit: cover;
+    border-radius: 4px;
+}
 .next-post {
     text-align: right;
     float: right;
