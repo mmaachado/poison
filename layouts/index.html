@@ -17,7 +17,7 @@
         {{ end }}
         {{ if or .Description .Truncated }}
         <div class="read-more-link">
-            <a href="{{ .RelPermalink }}">Read More…</a>
+            <a href="{{ .RelPermalink }}">{{ i18n "readMore" | default "Read more…" }}</a>
         </div>
         {{ end }}
         {{ end }}

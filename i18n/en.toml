@@ -1,0 +1,6 @@
+# Interface strings. A site in another language translates them by adding
+# the same keys to its own i18n/<lang>.toml; templates fall back to the
+# English text when a key is missing there.
+
+[readMore]
+other = "Read more…"
