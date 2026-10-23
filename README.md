@@ -26,6 +26,7 @@ Check out our demo site's [analytics](https://plausible.lukeorth.com/poison.luke
     - [Analytics](#analytics)
     - [Email newsletters](#email-newsletters)
     - [Series](#series)
+    - [Post banner](#post-banner)
     - [KaTeX](#katex)
     - [Tabs](#tabs)
     - [Mermaid diagrams](#mermaid-diagrams)
@@ -165,6 +166,21 @@ series: "How to use poison"
 tags: ["Hugo"]
 ---
 ```
+
+### Post banner
+Put an image at the top of a post, above the title, with `banner` in the front matter. `bannerAlt` sets its alt text; leave it out when the image is only decorative.
+
+```yaml
+---
+title: "A post with a banner"
+banner: "banner.jpg"
+bannerAlt: "A short description of the image"
+---
+```
+
+The value is looked up as a file in the post's page bundle first, then under `assets/`, and is otherwise used as given, so a remote URL or a file in `static/` also works. Images from the bundle or `assets/` get their width and height written out and are scaled down to 1600px wide when larger. The older `featuredImage` param still works as an alias.
+
+Banners only show on the post itself. To also show a short cropped strip on each home page card, set `cardBanners = true` under `[params]`.
 
 ### KaTeX
 Make your mathematical notations pop.
