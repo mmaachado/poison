@@ -390,6 +390,24 @@ tbody tr:nth-child(odd) th {
     object-fit: cover;
     border-radius: 4px;
 }
+/* bannerInk: the picture itself stays in place, invisible, for its size and
+   alt text, and a layer on top paints the text color through it. With
+   the same size and position as the img's object-fit, the two line up. */
+.post-banner--ink {
+    position: relative;
+}
+.post-banner--ink img {
+    opacity: 0;
+}
+.post-banner--ink::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--text-color);
+    -webkit-mask: var(--banner-src) center / cover no-repeat;
+    mask: var(--banner-src) center / cover no-repeat;
+    pointer-events: none;
+}
 .post-banner--card {
     margin-bottom: 1em;
 }
