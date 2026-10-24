@@ -1,0 +1,34 @@
+{{/*
+    Banner image for a post, from the banner front matter param (featuredImage
+    still works, for posts written before it existed). The value is looked up
+    as a page bundle resource first, then as a file under assets/, and is
+    otherwise used as given, which covers remote URLs and files in static/.
+
+    Takes the page, or a dict with "page" and "thumb": a thumb is the short
+    strip shown on home page cards, linked to the post.
+*/}}
+{{- $page := . -}}
+{{- $thumb := false -}}
+{{- if reflect.IsMap . -}}
+  {{- $page = .page -}}
+  {{- $thumb = .thumb | default false -}}
+{{- end -}}
+{{- with $page.Params.banner | default $page.Params.featuredImage -}}
+  {{- $src := . -}}
+  {{- $img := or ($page.Resources.Get $src) (resources.Get $src) -}}
+  {{- $alt := $page.Params.bannerAlt | default "" -}}
+  <figure class="post-banner{{ if $thumb }} post-banner--card{{ end }}">
+    {{- if $thumb }}<a href="{{ $page.RelPermalink }}" tabindex="-1" aria-hidden="true">{{ end -}}
+    {{- if and $img (eq $img.ResourceType "image") (ne $img.MediaType.SubType "svg") -}}
+      {{- if $thumb -}}
+        {{- $img = $img.Fill "1200x300 smart" -}}
+      {{- else if gt $img.Width 1600 -}}
+        {{- $img = $img.Resize "1600x" -}}
+      {{- end }}
+    <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $alt }}" decoding="async" {{ if $thumb }}loading="lazy"{{ else }}fetchpriority="high"{{ end }}>
+    {{- else }}
+    <img src="{{ with $img }}{{ .RelPermalink }}{{ else }}{{ $src }}{{ end }}" alt="{{ $alt }}" decoding="async" {{ if $thumb }}loading="lazy"{{ else }}fetchpriority="high"{{ end }}>
+    {{- end -}}
+    {{- if $thumb }}</a>{{ end }}
+  </figure>
+{{- end -}}
