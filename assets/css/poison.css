@@ -136,6 +136,15 @@ body > .wrapper {
 .container.content::-webkit-scrollbar-track {
    margin: 5.5em 0;
 }
+/* Lists (main is the last child, with no ToC beside it) still scroll, they
+   just don't show a bar: on a page of cards it is noise. Posts keep theirs,
+   where it doubles as a sense of how much is left to read. */
+.container.content:last-child {
+    scrollbar-width: none;
+}
+.container.content:last-child::-webkit-scrollbar {
+    display: none;
+}
 
 .sidebar {
     background-color: var(--sidebar-bg-color);
