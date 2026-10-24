@@ -183,6 +183,8 @@ bannerAlt: "A short description of the image"
 
 The value is looked up as a file in the post's page bundle first, then under `assets/`, and is otherwise used as given, so a remote URL or a file in `static/` also works. Images from the bundle or `assets/` get their width and height written out and are scaled down to 1600px wide when larger. The older `featuredImage` param still works as an alias.
 
+For single-color line art on a transparent background, add `bannerInk: true`. The drawing is then painted in the theme's text color, so it stays visible after switching between light and dark mode. Leave it off for photos.
+
 Banners only show on the post itself. To also show a short cropped strip on each home page card, set `cardBanners = true` under `[params]`.
 
 ### KaTeX
