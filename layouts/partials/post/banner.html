@@ -6,6 +6,10 @@
 
     Takes the page, or a dict with "page" and "thumb": a thumb is the short
     strip shown on home page cards, linked to the post.
+
+    bannerInk is for single-color line art on a transparent background: the
+    image becomes a mask filled with the text color, so the drawing follows
+    the light/dark toggle instead of vanishing on one of the backgrounds.
 */}}
 {{- $page := . -}}
 {{- $thumb := false -}}
@@ -17,14 +21,20 @@
   {{- $src := . -}}
   {{- $img := or ($page.Resources.Get $src) (resources.Get $src) -}}
   {{- $alt := $page.Params.bannerAlt | default "" -}}
-  <figure class="post-banner{{ if $thumb }} post-banner--card{{ end }}">
+  {{- $ink := $page.Params.bannerInk | default false -}}
+  {{- if and $img (eq $img.ResourceType "image") (ne $img.MediaType.SubType "svg") -}}
+    {{- if $thumb -}}
+      {{- $img = $img.Fill "1200x300 smart" -}}
+    {{- else if gt $img.Width 1600 -}}
+      {{- $img = $img.Resize "1600x" -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $url := $src -}}
+  {{- with $img }}{{ $url = .RelPermalink }}{{ end -}}
+  <figure class="post-banner{{ if $thumb }} post-banner--card{{ end }}{{ if $ink }} post-banner--ink{{ end }}"
+    {{- if $ink }} style="{{ printf "--banner-src: url('%s')" $url | safeCSS }}"{{ end }}>
     {{- if $thumb }}<a href="{{ $page.RelPermalink }}" tabindex="-1" aria-hidden="true">{{ end -}}
-    {{- if and $img (eq $img.ResourceType "image") (ne $img.MediaType.SubType "svg") -}}
-      {{- if $thumb -}}
-        {{- $img = $img.Fill "1200x300 smart" -}}
-      {{- else if gt $img.Width 1600 -}}
-        {{- $img = $img.Resize "1600x" -}}
-      {{- end }}
+    {{- if and $img (eq $img.ResourceType "image") (ne $img.MediaType.SubType "svg") }}
     <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $alt }}" decoding="async" {{ if $thumb }}loading="lazy"{{ else }}fetchpriority="high"{{ end }}>
     {{- else }}
     <img src="{{ with $img }}{{ .RelPermalink }}{{ else }}{{ $src }}{{ end }}" alt="{{ $alt }}" decoding="async" {{ if $thumb }}loading="lazy"{{ else }}fetchpriority="high"{{ end }}>
